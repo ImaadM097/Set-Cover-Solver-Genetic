@@ -6,14 +6,13 @@ import time
 
 POPULATION_SIZE = 100
 UNIVERSE_SIZE = 100
-NUM_OF_SUBSETS = 50
 NUM_OF_GENERATIONS = 3000
 UNIVERSE = list(range(1,UNIVERSE_SIZE+1))
 UNIVERSE_SET = set(UNIVERSE)
 MUTATION_PROB = 0.3
 CULLING_PARAM = 50
 ELITISM_PARAM = 10
-
+NUM_OF_SUBSETS = 50    #initialised to 50, later reassigned to len(scp_test)
 
 def generatePopulation(popSize: int, listOfSubsets: list) -> list:
     totalSubsetsInList = len(listOfSubsets)
@@ -49,7 +48,7 @@ def getPopFitness(population: list, listOfSubsets: list) -> list:
 
 def getNextGen(population: list, listOfSubsets: list, cullingParam: int) -> list:
     curGenFitness = getPopFitness(population,listOfSubsets)
-    weights = np.array(curGenFitness)/curGenFitness.sum()
+    weights = np.array(curGenFitness)/np.array(curGenFitness).sum()
     
     nextGenPop = []
     for _ in range(POPULATION_SIZE + cullingParam):
