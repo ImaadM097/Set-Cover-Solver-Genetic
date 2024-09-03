@@ -6,11 +6,11 @@ import time
 
 POPULATION_SIZE = 100
 UNIVERSE_SIZE = 100
-NUM_OF_GENERATIONS = 3000
+NUM_OF_GENERATIONS = 2000
 UNIVERSE = list(range(1,UNIVERSE_SIZE+1))
 UNIVERSE_SET = set(UNIVERSE)
 MUTATION_PROB = 0.3
-CULLING_PARAM = 50
+CULLING_PARAM = 20
 ELITISM_PARAM = 10
 NUM_OF_SUBSETS = 50    #initialised to 50, later reassigned to len(scp_test)
 
@@ -46,8 +46,10 @@ def getPopFitness(population: list, listOfSubsets: list) -> list:
     return curGenFitness
 
 
-def getNextGen(population: list, listOfSubsets: list, cullingParam: int) -> list:
+def getNextGen(population: list, listOfSubsets: list, cullingParam: int, elitismParam: int) -> list:
     curGenFitness = getPopFitness(population,listOfSubsets)
+    sortedCurGen = [x for _,x in sorted(zip(getPopFitness(population,listOfSubsets),population), reverse=True)]
+    eliteParents = sortedCurGen[:elitismParam]
     weights = np.array(curGenFitness)/np.array(curGenFitness).sum()
     
     nextGenPop = []
@@ -60,7 +62,11 @@ def getNextGen(population: list, listOfSubsets: list, cullingParam: int) -> list
         nextGenPop.append(child)
     nextGenFitness = getPopFitness(nextGenPop,listOfSubsets)
     sortedNextGen = [x for _,x in sorted(zip(nextGenFitness,nextGenPop), reverse=True)]
-    sortedNextGen = sortedNextGen[:POPULATION_SIZE]
+    sortedNextGen = sortedNextGen[:POPULATION_SIZE]                   #culling
+
+    for ind in range(POPULATION_SIZE-elitismParam,POPULATION_SIZE):   #elitism
+        sortedNextGen[ind] = eliteParents[POPULATION_SIZE-ind-1]
+
     return sortedNextGen
 
 def getBestState(population: list, listOfSubsets: list) -> list:
@@ -79,7 +85,7 @@ def getNumberOfSubsetsInState(state: list) -> int:
         if bit == 1: subsetsIncluded += 1
     return subsetsIncluded
     
-def reproduce(parent1, parent2):
+def reproduce(parent1: list, parent2: list):
     crossOverPoint = random.randint(0,NUM_OF_SUBSETS-1)
     child = []
     for ind in range(crossOverPoint+1):
@@ -88,7 +94,7 @@ def reproduce(parent1, parent2):
         child.append(parent2[ind])
     return child
 
-def mutate(state):
+def mutate(state: list):
     index = random.randint(0,NUM_OF_SUBSETS-1)
     state[index] = 1 - state[index]
 
@@ -135,7 +141,7 @@ def main():
     population = generatePopulation(POPULATION_SIZE,listOfSubsets)
 
     for _ in range(NUM_OF_GENERATIONS):
-        newPopulation = getNextGen(population,listOfSubsets,CULLING_PARAM)
+        newPopulation = getNextGen(population,listOfSubsets,CULLING_PARAM,ELITISM_PARAM)
         newGenBestState = getBestState(newPopulation,listOfSubsets)
         newGenBestFitness = fitnessValue(newGenBestState,listOfSubsets)
         if(newGenBestFitness > bestFitness):

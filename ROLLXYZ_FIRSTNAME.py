@@ -7,13 +7,13 @@ import time
 NUM_OF_RANDOM_SCP = 10
 POPULATION_SIZE = 100
 UNIVERSE_SIZE = 100
-NUM_OF_SUBSETS = 50
+NUM_OF_SUBSETS = 350
 NUM_OF_GENERATIONS = 400
 UNIVERSE = list(range(1,UNIVERSE_SIZE+1))
 UNIVERSE_SET = set(UNIVERSE)
 MUTATION_PROB = 0.3
 CULLING_PARAM = 0
-ELITISM_PARAM = 10
+ELITISM_PARAM = 100
 count = 0
 
 fitnessValues = [[-1e9 for _ in range(NUM_OF_GENERATIONS)] for _ in range(NUM_OF_RANDOM_SCP)]
@@ -153,14 +153,14 @@ def main():
     plt.plot(x,y)
     plt.xlabel("Generation Number",fontsize=14)
     plt.ylabel("Best Fitness",fontsize=14)
-    plt.title(f"Best fitness (avg over 10 SCP) and Generation Number for |S|={NUM_OF_SUBSETS} and K={CULLING_PARAM}",fontsize=15)
+    plt.title(f"Best fitness (avg over 10 SCP) and Generation Number for |S|={NUM_OF_SUBSETS} and E={ELITISM_PARAM}",fontsize=15)
     plt.show()
 
     y1 = np.std(fitnessPlotValues,axis=0)
     plt.plot(x,y1)
     plt.xlabel("Generation Number",fontsize=14)
     plt.ylabel("Standard Deviation",fontsize=14)
-    plt.title(f"Std deviation (over 10 random SCP) and Generation Number for |S|={NUM_OF_SUBSETS} and K={CULLING_PARAM}",fontsize=15)
+    plt.title(f"Std deviation (over 10 random SCP) and Generation Number for |S|={NUM_OF_SUBSETS} and E={ELITISM_PARAM}",fontsize=15)
     plt.show()
     # print(count)
     # print(population)

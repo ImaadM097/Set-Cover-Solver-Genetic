@@ -53,3 +53,16 @@ Number of subsets: 350, Final best fitness: 750.0, Final std dev: 3.346640106136
 Number of subsets: 350, Final best fitness: 751.4, Final std dev: 2.8354893757515653
 Number of subsets: 350, Final best fitness: 751.6, Final std dev: 2.65329983228432
 Number of subsets: 50, Final best fitness: 148.8, Final std dev: 3.249615361854384
+Number of subsets: 50, Final best fitness: 150.4, Final std dev: 3.6660605559646724
+Number of subsets: 50, Final best fitness: 149.8, Final std dev: 4.853864439804639
+Number of subsets: 350, Final best fitness: 752.2, Final std dev: 3.7363083384538807
+Number of subsets: 350, Final best fitness: 750.0, Final std dev: 5.059644256269407
+Number of subsets: 350, Final best fitness: 751.0, Final std dev: 2.4083189157584592
+Number of subsets: 350, Final best fitness: 749.8, Final std dev: 4.422668877499197
+Number of subsets: 350, Final best fitness: 747.4, Final std dev: 4.1036569057366385
+Number of subsets: 350, Final best fitness: 750.0, Final std dev: 1.7888543819998317
+Number of subsets: 350, Final best fitness: 728.0, Final std dev: 4.560701700396552
+Number of subsets: 350, Final best fitness: 749.8, Final std dev: 4.512205669071391
+Number of subsets: 350, Final best fitness: 748.4, Final std dev: 3.5552777669262356
+Number of subsets: 350, Final best fitness: 740.6, Final std dev: 6.636264009214822
+Number of subsets: 350, Final best fitness: 644.0, Final std dev: 19.308029417835474
